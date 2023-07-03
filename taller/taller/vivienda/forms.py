@@ -2,8 +2,8 @@ from django.forms import ModelForm
 from django.utils.translation import gettext_lazy as _
 from django import forms
 
-from vivienda import Edificio
-from vivienda import Departamento
+from vivienda.models import *
+
 
 class EdificioForm(ModelForm):
     class meta:
@@ -17,6 +17,14 @@ class EdificioForm(ModelForm):
         }
 
 
+        def clean_ciudad(self):
+            valor = self.cleaned_data['ciudad']
+            n_ciudad = valor[0:1]
+            if n_ciudad == "L":
+                raise forms.ValidationError("La ciudad no puede iniciar con L")
+
+
+
 class DeparatmentoForm(ModelForm):
     class meta:
         model: Departamento
@@ -28,3 +36,24 @@ class DeparatmentoForm(ModelForm):
             'edificio': _("Elija el edifico"),
 
         }
+
+        def clean_propietario(self):
+            valor = self.cleaned_data['nombrePropietario']
+            num_palabras = len(valor.split())
+            if num_palabras < 3:
+                raise forms.ValidationError("Ingrese dos nombre por favor")
+            return valor
+
+        def clean_costo(self):
+            valor = self.cleaned_data['costo']
+            if valor > 100000:
+                raise forms.ValidationError("El costo es demaciado")
+            return valor
+        
+        def clean_cuartos(self):
+            valor = self.cleaned_data['num_cuartos']
+            if valor == 0 or valor > 7:
+                raise forms.ValidationError("El numero de cuartos no puede ser 0 o mayor de 7")
+            return valor
+        
+
