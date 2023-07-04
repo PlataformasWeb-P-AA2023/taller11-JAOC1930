@@ -32,7 +32,9 @@
         <ul>
             {% for t in e.Departamentos.all %}
             <li>
-                <span>{{t.nombrePropietario}} [<a href="{% url 'listado_departamento' t.id %}">ver</a>] [<a href="{% url 'editar_departamento' t.id %}">editar</a>] </span>
+                <span>{{t.nombrePropietario}} [<a href="{% url 'listado_departamento' t.id %}">ver</a>] 
+                    [<a href="{% url 'editar_departamento' t.id %}">editar</a>] [<a href="{% url 'eliminar_departamento' t.id %}" 
+                    onclick="return confirm('¿Está seguro de la eliminación?')">eliminar</a>]</span>
             </li>
             {% endfor %}
         </ul>

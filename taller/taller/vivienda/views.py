@@ -87,5 +87,12 @@ def obtener_departamentos(request, id):
     informacion_template = {'departamentos': departamento}
     return render(request, 'listado_departamento.html', informacion_template)
 
+def eliminar_departamento(request, id):
+    """
+    """
+    departamento = Departamento.objects.get(pk=id)
+    departamento.delete()
+    return redirect(index)
+
 
 
