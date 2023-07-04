@@ -1,0 +1,14 @@
+{% extends "master.html" %}
+
+{% block content %}
+
+{% block title %}
+<h2>Crear Departamento</h3>
+{% endblock %}
+<form action="" method="post" class="miformulario">
+  {% csrf_token %}
+  {{formulario.as_p}}
+  <br>
+  <p><input type='submit' value='Agregar'/></p>
+</form>
+{% endblock %}

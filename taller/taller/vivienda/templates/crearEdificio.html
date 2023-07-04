@@ -1,12 +1,14 @@
 {% extends "master.html" %}
 
 {% block content %}
-<h2>Crear Estudiante</h3>
 
+{% block title %}
+<h2>Crear Estudiante</h3>
+{% endblock %}
 <form action="" method="post" class="miformulario">
   {% csrf_token %}
   {{formulario.as_p}}
+  <br>
   <p><input type='submit' value='Agregar'/></p>
 </form>
-
 {% endblock %}
